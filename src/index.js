@@ -13,8 +13,6 @@ const editProfileDescriptionInput = document.querySelector('.popup__input_type_d
 const editProfileForm = document.querySelector('.popup_type_edit .popup__form');
 const profileName = document.querySelector('.profile__title');
 const profileDescription = document.querySelector('.profile__description');
-editProfileNameInput.value = profileName.textContent;
-editProfileDescriptionInput.value = profileDescription.textContent;
 
 const addCardPopup = document.querySelector('.popup_type_new-card');
 const addCardButton = document.querySelector('.profile__add-button');
@@ -22,9 +20,12 @@ const addCardNameInput = document.querySelector('.popup__input_type_card-name');
 const addCardUrlInput = document.querySelector('.popup__input_type_url');
 const addCardForm = document.querySelector('.popup_type_new-card .popup__form');
 
-editProfileButton.addEventListener('click', () => openModal(editProfilePopup));
+editProfileButton.addEventListener('click', () => {
+  editProfileNameInput.value = profileName.textContent;
+  editProfileDescriptionInput.value = profileDescription.textContent;
+  openModal(editProfilePopup);
+});
 addCardButton.addEventListener('click', () => openModal(addCardPopup));
-
 
 const viewImagePopup = document.querySelector('.popup_type_image');
 const popupImage = document.querySelector('.popup__image');
@@ -62,7 +63,7 @@ closePopupButtons.forEach((button) => {
   button.addEventListener('click', () => closeModal(closestPopup));
 });
 
-const handleSubmit = (e) => {
+const handleProfileFormSubmit = (e) => {
   e.preventDefault();
 
   const name = editProfileNameInput.value;
@@ -73,7 +74,7 @@ const handleSubmit = (e) => {
   closeModal(editProfilePopup);
 }
 
-editProfileForm.addEventListener('submit', handleSubmit);
+editProfileForm.addEventListener('submit', handleProfileFormSubmit);
 
 
 
