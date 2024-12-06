@@ -1,3 +1,13 @@
 .popup__form {
   margin-top: 27px;
 }
+
+.form__input-error {
+  display: block;
+  margin-block-start: 5px;
+  margin-block-end: 5px;
+  font-family: inherit;
+  color: #FF0000;
+  font-size: 12px;
+  display: none;
+}
