@@ -1,7 +1,7 @@
-import { deleteCardApi, setLikeToCard, removeLikeFromCard } from "./api.js";
-import { openModal, closeModal } from "./modal.js";
+import { setLikeToCard, removeLikeFromCard } from "./api.js";
+import { openModal } from "./modal.js";
 
-const createCard = (card, handleDeleteCard, handleLikeCard, handleOpenImagePopup, currentUserId, deleteCardPopup, submitDeleteCardForm) => {
+const createCard = (card, handleDeleteCard, handleLikeCard, handleOpenImagePopup, currentUserId, deleteCardPopup, cardToDelete) => {
   const cardTemplate = document.querySelector('#card-template').content;
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
   const { name, link, likes } = card;
@@ -27,28 +27,16 @@ const createCard = (card, handleDeleteCard, handleLikeCard, handleOpenImagePopup
   if (card.owner._id !== currentUserId) {
     deleteCardButton.remove();
   } else {
-    deleteCardButton.addEventListener('click', () => handleDeleteCard(deleteCardButton, card, deleteCardPopup, submitDeleteCardForm));
+    deleteCardButton.addEventListener('click', () => handleDeleteCard(deleteCardButton, card, deleteCardPopup, cardToDelete));
   }
  
   return cardElement;
 }
 
-const handleDeleteCard = (deleteCardButton, card, deleteCardPopup, submitDeleteCardForm) => {
+const handleDeleteCard = (deleteCardButton, card, deleteCardPopup, cardToDelete) => {
+  cardToDelete._id = card._id;
+  cardToDelete.element = deleteCardButton.closest('.places__item');
   openModal(deleteCardPopup);
-
-  submitDeleteCardForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    deleteCardApi(card._id)
-      .then(() => {
-        const closestItem = deleteCardButton.closest('.places__item');
-        closestItem.remove();
-        closeModal(deleteCardPopup);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-  })
 }
 
 const handleLikeCard = (likeCardButton, card, likesCountSpan, currentUserId) => {
