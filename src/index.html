@@ -39,7 +39,7 @@
       <form class="popup__form" name="edit-profile" novalidate>
         <input 
           data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
-          pattern="^[А-Яа-я,Ёё,A-Za-z,\-,\s]+$"
+          pattern="^[А-Яа-яЁёA-Za-z\-\s]+$"
           id="name-input" 
           minlength="2" 
           maxlength="40" 
@@ -52,7 +52,7 @@
         <span class="name-input-error form__input-error"></span>
         <input 
           data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
-          pattern="^[А-Яа-я,Ёё,A-Za-z,\-,\s]+$"
+          pattern="^[А-Яа-яЁёA-Za-z\-\s]+$"
           id="description-input" 
           minlength="2" 
           maxlength="200" 
@@ -78,7 +78,7 @@
           data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
           id="place-name-input"
           type="text" 
-          pattern="^[А-Яа-я,Ёё,A-Za-z,\-,\s]+$"
+          pattern="^[А-Яа-яЁёA-Za-z\-\s]+$"
           name="place-name" 
           class="popup__input popup__input_type_card-name" 
           placeholder="Название" 
@@ -86,7 +86,6 @@
         >
         <span class="place-name-input-error form__input-error"></span>
         <input
-          data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
           id="link-input"
           type="url" 
           name="link" 
@@ -96,6 +95,34 @@
         >
         <span class="link-input-error form__input-error"></span>
         <button type="submit" class="button popup__button">Сохранить</button>
+      </form>
+    </div>
+  </div>
+  <div class="popup popup_type_avatar popup_is-animated">
+    <div class="popup__content">
+      <button type="button" class="popup__close"></button>
+      <h3 class="popup__title">Новое место</h3>
+      <form class="popup__form" name="avatar">
+        <input
+          id="avatar-input"
+          type="url" 
+          name="link" 
+          class="popup__input popup__input_type_avatar_url" 
+          placeholder="Ссылка на картинку" 
+          data-error-message="Введите корректный URL"
+          required
+        >
+        <span class="avatar-input-error form__input-error"></span>
+        <button type="submit" class="button popup__button">Сохранить</button>
+      </form>
+    </div>
+  </div>
+  <div class="popup popup_type_delete popup_is-animated">
+    <div class="popup__content">
+      <button type="button" class="popup__close"></button>
+      <h3 class="popup__title">Вы уверены?</h3>
+      <form class="popup__form" name="delete">
+        <button type="submit" class="button popup__button">Да</button>
       </form>
     </div>
   </div>
@@ -115,7 +142,10 @@
     <div class="card__description">
       <h2 class="card__title">
       </h2>
-      <button type="button" class="card__like-button"></button>
+      <div class="card__like">
+        <button type="button" class="card__like-button"></button>
+        <span class="card__likes-count"></span>
+      </div>
     </div>
   </li>
 </template>
